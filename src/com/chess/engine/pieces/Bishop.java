@@ -32,8 +32,8 @@ public class Bishop extends Piece{
                     if (this.pieceAlliance != pieceAlliance) {
                         legalMoves.add(new Move.AttackMove(board,this,candidateDestinationCoordinate,pieceAtDestination));
                     }
+                    break;
                 }
-                break;
             }
         }
         return legalMoves;
