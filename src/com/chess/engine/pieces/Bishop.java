@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Bishop extends Piece{
     private final static int[] CANDIDATE_VECTOR_MOVE_COORDINATES={-9,-7,7,9};
-    Bishop(int piecePosition, Alliance pieceAliiance) {
-        super(piecePosition, pieceAliiance);
+    Bishop(int piecePosition, Alliance pieceAlliance) {
+        super(piecePosition, pieceAlliance);
     }
 
     @Override
