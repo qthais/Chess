@@ -8,9 +8,9 @@ import com.chess.engine.board.Move;
 public abstract class Piece {
     protected final int piecePosition;
     protected  final Alliance pieceAlliance;
-    Piece(final int  piecePosition, final Alliance pieceAliiance){
+    Piece(final int  piecePosition, final Alliance pieceAlliance){
         this.piecePosition=piecePosition;
-        this.pieceAlliance=pieceAliiance;
+        this.pieceAlliance=pieceAlliance;
     }
 
     public Alliance getPieceAlliance() {
