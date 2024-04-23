@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class Pawn extends Piece {
-    private final static int[] CANDIDATE_MOVE_COORDINATE = {8};
+    private final static int[] CANDIDATE_MOVE_COORDINATE = {8,16};
 
     Pawn(int piecePosition, Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
@@ -25,6 +25,15 @@ public class Pawn extends Piece {
             }
             if (currentCandidateOffset == 8 && !board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                 legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+            }else if(currentCandidateOffset==16&&this.isFirstMove()
+                    &&(BoardUtils.SECOND_ROW[this.piecePosition]
+                    &&this.getPieceAlliance().isBlack())
+                    ||(BoardUtils.SEVENTH_ROW[this.piecePosition]
+                    &&this.getPieceAlliance().isWhite())){
+                int bonusPawnMove=this.piecePosition+(this.getPieceAlliance().getDirection()*8);
+                if(!board.getTile(candidateDestinationCoordinate).isTileOccupied()&&!board.getTile(bonusPawnMove).isTileOccupied()){
+                    legalMoves.add(new MajorMove(board,this,candidateDestinationCoordinate));
+                }
             }
         }
         return legalMoves;

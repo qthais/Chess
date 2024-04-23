@@ -11,6 +11,8 @@ public class BoardUtils {
         }while (columnNumber<NUM_TILES);
         return column;
     }
+    public static final boolean []SECOND_ROW=null;
+    public static final boolean []SEVENTH_ROW=null;
     public static final boolean []FIRST_COLUMN = initColumn(0);
     public static final boolean []SECOND_COLUMN =initColumn(1) ;
     public static final boolean []SEVENTH_COLUMN =initColumn(6) ;
