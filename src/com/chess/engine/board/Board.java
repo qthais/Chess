@@ -3,15 +3,31 @@ package com.chess.engine.board;
 import com.chess.engine.*;
 import com.chess.engine.pieces.*;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Board {
     private final List<Tile> gameBoard;
+    private final Collection<Piece> whitePieces;
+    private final Collection<Piece> blackPieces;
 
     private Board(Builder builder){
         this.gameBoard=createGameBoard(builder);
+        this.whitePieces=calculateActivePieces(this.gameBoard,Alliance.WHITE);
+        this.blackPieces=calculateActivePieces(this.gameBoard,Alliance.BLACK);
+
+    }
+
+    private Collection<Piece> calculateActivePieces(List<Tile> gameBoard, Alliance alliance) {
+        final List<Piece> activePieces=new ArrayList<>();
+        for(final Tile tile:gameBoard){
+            if(tile.isTileOccupied()){
+                final Piece piece=tile.getPiece();
+                if(piece.getPieceAlliance()==alliance){
+                    activePieces.add(piece);
+                }
+            }
+        }
+        return activePieces;
     }
 
     private static List<Tile> createGameBoard(final Builder builder) {
@@ -23,7 +39,7 @@ public class Board {
     }
 
     public Tile getTile(final int tileCoordinate){
-        return null;
+        return gameBoard.get(tileCoordinate);
     }
     public static Board createStandardBoard(){
         Builder builder= new Builder();
