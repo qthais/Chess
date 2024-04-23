@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Queen extends Piece{
     private final static int[] CANDIDATE_VECTOR_MOVE_COORDINATES={-9,-7,7,9,-8,-1,1,8};
-    Queen(int piecePosition, Alliance pieceAlliance) {
+    public Queen(int piecePosition, Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
     }
 

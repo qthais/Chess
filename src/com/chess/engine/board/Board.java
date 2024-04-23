@@ -1,7 +1,7 @@
 package com.chess.engine.board;
 
 import com.chess.engine.*;
-import com.chess.engine.pieces.Piece;
+import com.chess.engine.pieces.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +25,34 @@ public class Board {
     public Tile getTile(final int tileCoordinate){
         return null;
     }
+    public static Board createStandardBoard(){
+        Builder builder= new Builder();
+        builder.setPiece(new Rook(0, Alliance.BLACK));
+        builder.setPiece(new Knight(1, Alliance.BLACK));
+        builder.setPiece(new Bishop(2, Alliance.BLACK));
+        builder.setPiece(new Queen(3, Alliance.BLACK));
+        builder.setPiece(new King(4, Alliance.BLACK));
+        builder.setPiece(new Bishop(5, Alliance.BLACK));
+        builder.setPiece(new Knight(6, Alliance.BLACK));
+        builder.setPiece(new Rook(7, Alliance.BLACK));
+        for (int i = 8; i < 16; i++) {
+            builder.setPiece(new Pawn(i, Alliance.BLACK));
+        }
+        for (int i = 48; i < 56; i++) {
+            builder.setPiece(new Pawn(i, Alliance.WHITE));
+        }
+        // Set up black pieces
+        builder.setPiece(new Rook(56, Alliance.WHITE));
+        builder.setPiece(new Knight(57, Alliance.WHITE));
+        builder.setPiece(new Bishop(58, Alliance.WHITE));
+        builder.setPiece(new Queen(59, Alliance.WHITE));
+        builder.setPiece(new King(60, Alliance.WHITE));
+        builder.setPiece(new Bishop(61, Alliance.WHITE));
+        builder.setPiece(new Knight(62, Alliance.WHITE));
+        builder.setPiece(new Rook(63, Alliance.WHITE));
+        builder.setMoveMaker(Alliance.WHITE);
+        return builder.build();
+    }
     public static class Builder{
         Map<Integer, Piece> boardConfig;
         Alliance nextMoveMaker;
@@ -42,4 +70,5 @@ public class Board {
             return new Board(this);
         }
     }
+
 }
