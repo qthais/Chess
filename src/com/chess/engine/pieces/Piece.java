@@ -6,10 +6,12 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.Move;
 
 public abstract class Piece {
+    protected final PieceType pieceType;
     protected final int piecePosition;
     protected  final Alliance pieceAlliance;
     protected boolean isFirstMove;
-    Piece(final int  piecePosition, final Alliance pieceAlliance){
+    Piece(final PieceType pieceType,final int  piecePosition, final Alliance pieceAlliance){
+        this.pieceType=pieceType;
         this.piecePosition=piecePosition;
         this.pieceAlliance=pieceAlliance;
         this.isFirstMove=false;
@@ -29,13 +31,47 @@ public abstract class Piece {
         return this.piecePosition;
     }
 
+    public PieceType getPieceType() {
+        return pieceType;
+    }
+
     public enum PieceType{
-        PAWN("P"),
-        KNIGHT("N"),
-        BISHOP("B"),
-        ROOK("R"),
-        QUEEN("K"),
-        KING("K");
+        PAWN("P") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        KNIGHT("N"){
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        BISHOP("B"){
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        ROOK("R"){
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        QUEEN("K"){
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        KING("K"){
+            @Override
+            public boolean isKing() {
+                return true;
+            }
+        };
         private String pieceName;
         PieceType(final String pieceName){
             this.pieceName=pieceName;
@@ -45,5 +81,8 @@ public abstract class Piece {
         public String toString() {
             return this.pieceName;
         }
+
+        public abstract boolean isKing() ;
+
     }
 }
