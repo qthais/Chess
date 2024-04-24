@@ -49,4 +49,8 @@ public class Rook extends Piece{
         return BoardUtils.EIGHTH_COLUMN[currentPosition]
                 && (candidateOffset == 1);
     }
+    @Override
+    public String toString() {
+        return PieceType.ROOK.toString();
+    }
 }
