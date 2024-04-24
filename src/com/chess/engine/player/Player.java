@@ -1,4 +1,5 @@
 package com.chess.engine.player;
+import com.chess.engine.Alliance;
 import com.chess.engine.board.*;
 import com.chess.engine.pieces.*;
 
@@ -24,5 +25,6 @@ public abstract class Player {
     }
 
     public abstract Collection<Piece> getActivePieces();
-
+    public abstract Alliance getAlliance();
+    public abstract Player getOpponent();
 }
