@@ -38,6 +38,14 @@ public abstract class Player {
         throw new RuntimeException("Should not reach here!Not a valid board!!");
     }
 
+    public King getPlayerKing() {
+        return this.playerKing;
+    }
+
+    public Collection<Move> getLegalMoves() {
+        return this.legalMoves;
+    }
+
     public boolean isMoveLegal(final Move move){
         return this.legalMoves.contains(move);
     }
@@ -67,7 +75,16 @@ public abstract class Player {
         return false;
     }
     public MoveTransition makeMove(final Move move){
-        return null;
+        if(!isMoveLegal(move)){
+            return new MoveTransition(this.board,move,MoveStatus.ILLEGAL_MOVE);
+        }
+        final Board transitionBoard=move.execute();
+        final Collection<Move> kingAttacks=Player.calculateAttacksOnTile(transitionBoard.getCurrentPlayer().getOpponent().getPlayerKing().getPiecePosition(),
+                transitionBoard.getCurrentPlayer().getLegalMoves());
+        if(!kingAttacks.isEmpty()){
+            return new MoveTransition(this.board,move,MoveStatus.LEAVES_PLAYER_IN_CHECK);
+        }
+        return new MoveTransition(transitionBoard,move,MoveStatus.DONE);
     }
 
     public abstract Collection<Piece> getActivePieces();
