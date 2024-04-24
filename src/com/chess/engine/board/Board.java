@@ -108,6 +108,14 @@ public class Board {
         return whitePieces;
     }
 
+    public BlackPlayer getBlackPlayer() {
+        return blackPlayer;
+    }
+
+    public WhitePlayer getWhitePlayer() {
+        return whitePlayer;
+    }
+
     public static class Builder{
         Map<Integer, Piece> boardConfig;
         Alliance nextMoveMaker;
@@ -127,5 +135,6 @@ public class Board {
             return new Board(this);
         }
     }
+
 
 }
