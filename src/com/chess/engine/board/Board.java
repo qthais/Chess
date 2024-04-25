@@ -123,6 +123,13 @@ public class Board {
         return currentPlayer;
     }
 
+    public Collection<Move> getAllLegalMoves() {
+        List<Move> allLegalMoves = new ArrayList<>();
+        allLegalMoves.addAll(this.whitePlayer.getLegalMoves());
+        allLegalMoves.addAll(this.blackPlayer.getLegalMoves());
+        return allLegalMoves;
+    }
+
     public static class Builder{
         Map<Integer, Piece> boardConfig;
         Alliance nextMoveMaker;
