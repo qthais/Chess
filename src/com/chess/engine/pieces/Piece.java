@@ -10,6 +10,16 @@ public abstract class Piece {
     protected final int piecePosition;
     protected  final Alliance pieceAlliance;
     protected boolean isFirstMove;
+    private final int cachedHashCode=computeHashCode();
+
+    private int computeHashCode() {
+        int result=pieceType.hashCode();
+        result=31+result+pieceAlliance.hashCode();
+        result=31+result+piecePosition;
+        result=31+result+(isFirstMove?1:0);
+        return result;
+    }
+
     Piece(final PieceType pieceType,final int  piecePosition, final Alliance pieceAlliance){
         this.pieceType=pieceType;
         this.piecePosition=piecePosition;
@@ -35,6 +45,24 @@ public abstract class Piece {
         return pieceType;
     }
     public abstract Piece movePiece(Move move);
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this==obj){
+            return true;
+        }
+        if(!(obj instanceof Piece)){
+            return false;
+        }
+        final Piece otherPiece=(Piece) obj;
+        return piecePosition== otherPiece.getPiecePosition()&&pieceType==otherPiece.getPieceType()&&
+                pieceAlliance==otherPiece.getPieceAlliance()&&isFirstMove==otherPiece.isFirstMove();
+    }
+
+    @Override
+    public int hashCode() {
+        return this.cachedHashCode;
+    }
 
     public enum PieceType{
         PAWN("P") {
@@ -84,6 +112,5 @@ public abstract class Piece {
         }
 
         public abstract boolean isKing() ;
-
     }
 }
