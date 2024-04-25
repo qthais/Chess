@@ -41,6 +41,12 @@ public class Queen extends Piece{
         }
         return legalMoves;
     }
+
+    @Override
+    public Queen movePiece(Move move) {
+        return new Queen(move.getDestinationCoordinate(),move.getMovedPiece().getPieceAlliance());
+    }
+
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset) {
         return BoardUtils.FIRST_COLUMN[currentPosition]
                 && (candidateOffset == -9 || candidateOffset == 7|| candidateOffset == -1);

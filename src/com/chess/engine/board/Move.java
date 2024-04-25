@@ -16,6 +16,10 @@ public abstract class Move {
         return this.destinationCoordinate;
     }
 
+    public Piece getMovedPiece() {
+        return movedPiece;
+    }
+
     public abstract Board execute() ;
 
 
@@ -29,14 +33,14 @@ public abstract class Move {
             final Board.Builder builder= new Board.Builder();
             for(final Piece piece: this.board.getCurrentPlayer().getActivePieces()){
                 //To do more
-                if(this.movedPiece.equals(piece)){
+                if(!this.movedPiece.equals(piece)){
                     builder.setPiece(piece);
                 }
             }
             for(final Piece piece:this.board.getCurrentPlayer().getOpponent().getActivePieces()){
                 builder.setPiece(piece);
             }
-            builder.setPiece(null);
+            builder.setPiece(this.movedPiece.movePiece(this));
             builder.setMoveMaker(this.board.getCurrentPlayer().getOpponent().getAlliance());
             return builder.build();
         }
