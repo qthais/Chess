@@ -26,7 +26,19 @@ public abstract class Move {
 
         @Override
         public Board execute() {
-            return null;
+            final Board.Builder builder= new Board.Builder();
+            for(final Piece piece: this.board.getCurrentPlayer().getActivePieces()){
+                //To do more
+                if(this.movedPiece.equals(piece)){
+                    builder.setPiece(piece);
+                }
+            }
+            for(final Piece piece:this.board.getCurrentPlayer().getOpponent().getActivePieces()){
+                builder.setPiece(piece);
+            }
+            builder.setPiece(null);
+            builder.setMoveMaker(this.board.getCurrentPlayer().getOpponent().getAlliance());
+            return builder.build();
         }
     }
     public static final class AttackMove extends Move{
