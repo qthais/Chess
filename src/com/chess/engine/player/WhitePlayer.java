@@ -56,6 +56,6 @@ public class WhitePlayer extends Player {
                 }
             }
         }
-        return null;
+        return kingCastles;
     }
 }
