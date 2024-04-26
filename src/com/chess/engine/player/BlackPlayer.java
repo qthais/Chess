@@ -1,13 +1,14 @@
 package com.chess.engine.player;
 
 import com.chess.engine.Alliance;
-import com.chess.engine.board.Board;
-import com.chess.engine.board.Move;
-import com.chess.engine.board.Tile;
+import com.chess.engine.board.*;
+import com.chess.engine.board.Move.*;
 import com.chess.engine.pieces.Piece;
+import com.chess.engine.pieces.Rook;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class BlackPlayer extends Player {
@@ -43,7 +44,9 @@ public class BlackPlayer extends Player {
                     if(Player.calculateAttacksOnTile(5,opponentLegals).isEmpty()
                             &&Player.calculateAttacksOnTile(6,opponentLegals).isEmpty()
                             &&rookTile.getPiece().getPieceType().isRook()){
-                        kingCastles.add(null);
+                        kingCastles.add(new KingSideCastleMove(this.board,this.playerKing,
+                                6,(Rook) rookTile.getPiece(),
+                                rookTile.getTileCoordinate(), 5));
                     }
                 }
             }
@@ -53,10 +56,12 @@ public class BlackPlayer extends Player {
                 final Tile rookTile=this.board.getTile(0);
                 if(rookTile.isTileOccupied()&&rookTile.getPiece().isFirstMove()){
                     //to do
-                    kingCastles.add(null);
+                    kingCastles.add(new KingSideCastleMove(this.board,this.playerKing,
+                            2,(Rook) rookTile.getPiece(),
+                            rookTile.getTileCoordinate(), 3));
                 }
             }
         }
-        return kingCastles;
+        return Collections.unmodifiableList(kingCastles);
     }
 }

@@ -24,6 +24,11 @@ public abstract class Tile {
     }
     public abstract boolean isTileOccupied();
     public abstract Piece getPiece();
+
+    public int getTileCoordinate() {
+        return tileCoordinate;
+    }
+
     public static final class EmptyTile extends Tile{
         private EmptyTile(final int coordinate){
             super(coordinate);
@@ -66,7 +71,6 @@ public abstract class Tile {
         public Piece getPiece() {
             return this.pieceOnTile;
         }
-
 
     }
 }
