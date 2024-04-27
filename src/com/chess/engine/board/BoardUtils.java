@@ -11,8 +11,6 @@ public class BoardUtils {
         }while (columnNumber<NUM_TILES);
         return column;
     }
-    public static final boolean []SECOND_ROW=initRow(8);
-
     private static boolean[] initRow(int rowNumber) {
         final boolean[] row=new boolean[NUM_TILES];
         do{
@@ -21,10 +19,18 @@ public class BoardUtils {
         }while (rowNumber%NUM_TILES_PER_ROW!=0);
         return row;
     }
-
+    public static final boolean []FIRST_ROW=initRow(0);
+    public static final boolean []SECOND_ROW=initRow(8);
+    public static final boolean []THIRD_ROW=initRow(16);
+    public static final boolean []FOURTH_ROW=initRow(24);
+    public static final boolean []FIFTH_ROW=initRow(32);
+    public static final boolean []SIXTH_ROW=initRow(40);
     public static final boolean []SEVENTH_ROW=initRow(48);
+    public static final boolean []EIGHTH_ROW=initRow(56);
+
     public static final boolean []FIRST_COLUMN = initColumn(0);
     public static final boolean []SECOND_COLUMN =initColumn(1) ;
+
     public static final boolean []SEVENTH_COLUMN =initColumn(6) ;
     public static final boolean []EIGHTH_COLUMN =initColumn(7) ;
 
