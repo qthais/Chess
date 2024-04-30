@@ -33,6 +33,7 @@ public class Table {
     private Tile destinationTile;
     private Piece humanMovedPiece;
     private BoardDirection boardDirection;
+    private boolean highlightLegalMoves;
     private static String defaultPieceImagePath="./art/pieces/plain/";
     private final Color lightTileColor = Color.decode("#FFFACD");
     private final Color darkTileColor = Color.decode("#593E1A");
@@ -45,6 +46,7 @@ public class Table {
         this.chessBoard=Board.createStandardBoard();
         this.boardPanel=new BoardPanel();
         this.boardDirection=BoardDirection.NORMAL;
+        highlightLegalMoves=false;
         this.gameFrame.add(this.boardPanel,BorderLayout.CENTER);
         this.gameFrame.setVisible(true);
         this.gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,6 +57,7 @@ public class Table {
     private JMenuBar createTableMenuBar() {
         final JMenuBar tableMenuBar=new JMenuBar();
         tableMenuBar.add(createFileMenu());
+        tableMenuBar.add(createPreferencesMenu());
         return tableMenuBar;
     }
 
@@ -78,6 +81,28 @@ public class Table {
         fileMenu.add(exitMenuItem);
         return fileMenu;
     }
+    private JMenu createPreferencesMenu(){
+        final JMenu preferencesMenu=new JMenu("Preferences");
+        final JMenuItem flipBoardMenuItem=new JMenuItem("FlipBoard");
+        flipBoardMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boardDirection=boardDirection.opposite();
+                boardPanel.drawBoard(chessBoard);
+            }
+        });
+        preferencesMenu.add(flipBoardMenuItem);
+        preferencesMenu.addSeparator();
+        final JCheckBoxMenuItem legalMoveHighLighterCheckBox= new JCheckBoxMenuItem("Highlight Legal Moves",false);
+        legalMoveHighLighterCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                highlightLegalMoves=legalMoveHighLighterCheckBox.isSelected();
+            }
+        });
+        preferencesMenu.add(legalMoveHighLighterCheckBox);
+        return preferencesMenu;
+    }
     private class BoardPanel extends JPanel{
         final List<TilePanel> boardTiles;
         BoardPanel(){
@@ -94,7 +119,7 @@ public class Table {
 
         public void drawBoard(Board board) {
             removeAll();
-            for(final TilePanel tilePanel:boardTiles){
+            for(final TilePanel tilePanel:boardDirection.traverse(boardTiles)){
                 tilePanel.drawTile(board);
                 add(tilePanel);
             }
@@ -110,6 +135,7 @@ public class Table {
             setPreferredSize(TILE_PANEL_DIMENSION);
             assignTileColor();
             assignTilePieceIcon(chessBoard);
+
             addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -200,8 +226,28 @@ public class Table {
         public void drawTile(Board board) {
             assignTileColor();
             assignTilePieceIcon(board);
+            highlightLegals(board);
             validate();
             repaint();
+        }
+        private void highlightLegals(final Board board){
+            if(highlightLegalMoves){
+                for(final Move move:pieceLegalMoves(board)){
+                    if(move.getDestinationCoordinate()==this.tileId){
+                        try {
+                            add(new JLabel(new ImageIcon(ImageIO.read(new File("./art/misc/green_dot.png")))));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            }
+        }
+        private Collection<Move> pieceLegalMoves(final Board board){
+            if(humanMovedPiece!=null&& humanMovedPiece.getPieceAlliance()==board.getCurrentPlayer().getAlliance()){
+                return humanMovedPiece.calculateLegalMoves(board);
+            }
+            return Collections.emptyList();
         }
     }
     public enum BoardDirection{

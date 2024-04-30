@@ -39,7 +39,7 @@ public class Pawn extends Piece {
                     if(board.getTile(candidateDestinationCoordinate).isTileOccupied()){
                         final Piece pieceOnCandidate=board.getTile(candidateDestinationCoordinate).getPiece();
                         if(this.pieceAlliance!=pieceOnCandidate.getPieceAlliance()){
-                            legalMoves.add(new AttackMove(board,this,candidateDestinationCoordinate,pieceOnCandidate));
+                            legalMoves.add(new MajorMove(board,this,candidateDestinationCoordinate));
                         }
                     }
                 }else if(currentCandidateOffset==9
@@ -48,7 +48,7 @@ public class Pawn extends Piece {
                     if(board.getTile(candidateDestinationCoordinate).isTileOccupied()){
                         final Piece pieceOnCandidate=board.getTile(candidateDestinationCoordinate).getPiece();
                         if(this.pieceAlliance!=pieceOnCandidate.getPieceAlliance()){
-                            legalMoves.add(new AttackMove(board,this,candidateDestinationCoordinate,pieceOnCandidate));
+                            legalMoves.add(new MajorMove(board,this,candidateDestinationCoordinate));
                         }
                     }
 
