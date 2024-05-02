@@ -33,10 +33,12 @@ public class Pawn extends Piece {
                     &&this.getPieceAlliance().isBlack())
                     ||(BoardUtils.SECOND_RANK[this.piecePosition]
                     &&this.getPieceAlliance().isWhite()))){
-                int bonusPawnMove=this.piecePosition+(this.getPieceAlliance().getDirection()*8);
+                int bonusPawnMove= this.piecePosition + (this.getPieceAlliance().getDirection() * 8);
                 if(!board.getTile(candidateDestinationCoordinate).isTileOccupied()&&!board.getTile(bonusPawnMove).isTileOccupied()){
                     legalMoves.add(new PawnJump(board,this,candidateDestinationCoordinate));
-                } else if(currentCandidateOffset==7
+                }
+            }
+            else if(currentCandidateOffset==7
                         &&!((BoardUtils.EIGHTH_COLUMN[this.piecePosition]&&this.pieceAlliance.isWhite())
                         ||(BoardUtils.FIRST_COLUMN[this.piecePosition]&&this.pieceAlliance.isBlack()))){
                     if(board.getTile(candidateDestinationCoordinate).isTileOccupied()){
@@ -45,7 +47,8 @@ public class Pawn extends Piece {
                             legalMoves.add(new PawnAttackMove(board,this,candidateDestinationCoordinate,pieceOnCandidate));
                         }
                     }
-                }else if(currentCandidateOffset==9
+            }
+            else if(currentCandidateOffset==9
                         &&!((BoardUtils.EIGHTH_COLUMN[this.piecePosition]&&this.pieceAlliance.isBlack())
                         ||(BoardUtils.FIRST_COLUMN[this.piecePosition]&&this.pieceAlliance.isWhite()))){
                     if(board.getTile(candidateDestinationCoordinate).isTileOccupied()){
@@ -54,12 +57,12 @@ public class Pawn extends Piece {
                             legalMoves.add(new PawnAttackMove(board,this,candidateDestinationCoordinate,pieceOnCandidate));
                         }
                     }
-
                 }
             }
-        }
         return legalMoves;
-    }
+        }
+
+
 
     @Override
     public Pawn movePiece(Move move) {

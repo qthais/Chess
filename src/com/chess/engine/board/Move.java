@@ -123,10 +123,6 @@ public abstract class Move {
             return super.equals(otherAttackMove)&&getAttackedPiece().equals(otherAttackMove.getAttackedPiece());
         }
 
-        @Override
-        public Board execute() {
-            return null;
-        }
 
         @Override
         public boolean isAttack() {
@@ -148,6 +144,17 @@ public abstract class Move {
     public static class PawnAttackMove extends AttackMove {
         public PawnAttackMove(Board board, Piece movedPiece, int destinationCoordinate, Piece attackedPiece) {
             super(board, movedPiece, destinationCoordinate, attackedPiece);
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return this==obj||obj instanceof PawnAttackMove&&super.equals(obj);
+        }
+
+        @Override
+        public String toString() {
+            return BoardUtils.getPositionAtCoordinate(this.movedPiece.getPiecePosition()).substring(0,1)+"x"+
+                    BoardUtils.getPositionAtCoordinate((this.destinationCoordinate));
         }
     }
 
