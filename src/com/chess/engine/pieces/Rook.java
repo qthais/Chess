@@ -10,9 +10,11 @@ import java.util.List;
 public class Rook extends Piece{
     private final static int[] CANDIDATE_VECTOR_MOVE_COORDINATES={-8,-1,1,8};
     public Rook(int piecePosition, Alliance pieceAlliance) {
-        super(PieceType.ROOK,piecePosition, pieceAlliance);
+        super(PieceType.ROOK,piecePosition, pieceAlliance,true);
     }
-
+    public Rook(int piecePosition, Alliance pieceAlliance,final boolean isFirstMove) {
+        super(PieceType.ROOK,piecePosition, pieceAlliance,isFirstMove);
+    }
     @Override
     public Collection<Move> calculateLegalMoves(Board board) {
         final List<Move> legalMoves= new ArrayList<>();

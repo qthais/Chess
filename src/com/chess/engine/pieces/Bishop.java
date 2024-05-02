@@ -10,7 +10,10 @@ import java.util.List;
 public class Bishop extends Piece{
     private final static int[] CANDIDATE_VECTOR_MOVE_COORDINATES={-9,-7,7,9};
     public Bishop(int piecePosition, Alliance pieceAlliance) {
-        super(PieceType.BISHOP,piecePosition, pieceAlliance);
+        super(PieceType.BISHOP,piecePosition, pieceAlliance,true);
+    }
+    public Bishop(int piecePosition, Alliance pieceAlliance,final boolean isFirstMove) {
+        super(PieceType.BISHOP,piecePosition, pieceAlliance,isFirstMove);
     }
 
     @Override

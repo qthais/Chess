@@ -10,7 +10,10 @@ import java.util.List;
 public class Queen extends Piece{
     private final static int[] CANDIDATE_VECTOR_MOVE_COORDINATES={-9,-7,7,9,-8,-1,1,8};
     public Queen(int piecePosition, Alliance pieceAlliance) {
-        super(PieceType.QUEEN,piecePosition, pieceAlliance);
+        super(PieceType.QUEEN,piecePosition, pieceAlliance,true);
+    }
+    public Queen(int piecePosition, Alliance pieceAlliance,final boolean isFirstMove) {
+        super(PieceType.QUEEN,piecePosition, pieceAlliance,isFirstMove);
     }
 
     @Override
