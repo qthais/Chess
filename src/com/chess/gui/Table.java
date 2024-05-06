@@ -23,7 +23,7 @@ import static javax.swing.SwingUtilities.isLeftMouseButton;
 import static javax.swing.SwingUtilities.isRightMouseButton;
 
 public class Table {
-    private static final Dimension OUTER_FRAME_DIMENSION = new Dimension(800,800);
+    private static final Dimension OUTER_FRAME_DIMENSION = new Dimension(1000,1000);
     private static final Dimension BOARD_PANEL_DIMENSION = new Dimension(600,600);
     private static final Dimension TILE_PANEL_DIMENSION=new Dimension(10,10);
     private final JFrame gameFrame;
@@ -37,7 +37,7 @@ public class Table {
     private Piece humanMovedPiece;
     private BoardDirection boardDirection;
     private boolean highlightLegalMoves;
-    private static String defaultPieceImagePath="./art/pieces/plain/";
+    private static String defaultPieceImagePath="art/pieces/plain/";
     private final Color lightTileColor = Color.decode("#FFFACD");
     private final Color darkTileColor = Color.decode("#593E1A");
     public Table(){

@@ -27,6 +27,10 @@ public abstract class Move {
         return this.destinationCoordinate;
     }
 
+    public Board getBoard() {
+        return board;
+    }
+
     public Piece getMovedPiece() {
         return movedPiece;
     }
@@ -201,8 +205,58 @@ public abstract class Move {
             return builder.build();
         }
     }
-    public static class PawnJump extends Move{
+    public static class PawnPromotion extends Move{
+        final Move decoratedMove;
+        final Pawn promotedPawn;
+        public PawnPromotion(final Move decoratedMove) {
+            super(decoratedMove.getBoard(), decoratedMove.getMovedPiece(), decoratedMove.getDestinationCoordinate());
+            this.decoratedMove=decoratedMove;
+            this.promotedPawn=(Pawn)decoratedMove.getMovedPiece();
+        }
 
+        @Override
+        public int hashCode() {
+            return decoratedMove.hashCode()+31*promotedPawn.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return this==obj || obj instanceof PawnPromotion&&(super.equals(obj));
+        }
+
+        @Override
+        public Board execute() {
+            final Board pawnMovedBoard=this.decoratedMove.execute();
+            final Builder builder=new Builder();
+            for(final Piece piece: pawnMovedBoard.getCurrentPlayer().getActivePieces()){
+                if(!this.promotedPawn.equals(piece)){
+                    builder.setPiece(piece);
+                }
+            }
+            for(final Piece piece:pawnMovedBoard.getCurrentPlayer().getOpponent().getActivePieces()){
+                builder.setPiece(piece);
+            }
+            builder.setPiece(this.promotedPawn.getPromotionPiece().movePiece(this));
+            builder.setMoveMaker(pawnMovedBoard.getCurrentPlayer().getAlliance());
+            return builder.build();
+        }
+
+        @Override
+        public boolean isAttack() {
+            return this.decoratedMove.isAttack();
+        }
+
+        @Override
+        public Piece getAttackedPiece() {
+            return this.decoratedMove.getAttackedPiece();
+        }
+
+        @Override
+        public String toString() {
+            return "";
+        }
+    }
+    public static class PawnJump extends Move{
         public PawnJump(Board board, Piece movedPiece, int destinationCoordinate) {
             super(board, movedPiece, destinationCoordinate);
         }
