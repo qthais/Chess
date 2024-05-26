@@ -23,11 +23,10 @@ public class King extends Piece{
     @Override
     public Collection<Move> calculateLegalMoves(Board board) {
         final List<Move> legalMoves = new ArrayList<>();
-        int candidateDestinationCoordinate;
         for (final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATE){
-            candidateDestinationCoordinate=this.piecePosition+currentCandidateOffset;
-            if(!isFirstColumnExclusion(this.piecePosition,currentCandidateOffset)
-                    ||!isEighthColumnExclusion(this.piecePosition,currentCandidateOffset)){
+            final int candidateDestinationCoordinate=this.piecePosition+currentCandidateOffset;
+            if(isFirstColumnExclusion(this.piecePosition,currentCandidateOffset)
+                    ||isEighthColumnExclusion(this.piecePosition,currentCandidateOffset)){
                 continue;
             }
             if(BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)){

@@ -18,7 +18,7 @@ public abstract class Player {
         this.legalMoves=legalMoves;
         this.legalMoves.addAll(calculateKingCastles(legalMoves,opponentMoves));
         //may have problem
-        this.isInCheck=!Player.calculateAttacksOnTile(this.playerKing.getPiecePosition(),opponentMoves).isEmpty();
+        this.isInCheck=!calculateAttacksOnTile(this.playerKing.getPiecePosition(),opponentMoves).isEmpty();
     }
 
     protected static Collection<Move> calculateAttacksOnTile(int piecePosition, Collection<Move> moves) {

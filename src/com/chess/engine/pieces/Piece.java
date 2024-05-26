@@ -114,7 +114,7 @@ public abstract class Piece {
                 return true;
             }
         },
-        QUEEN("K",500){
+        QUEEN("Q",500){
             @Override
             public boolean isKing() {
                 return false;

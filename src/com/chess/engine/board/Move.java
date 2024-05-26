@@ -135,10 +135,9 @@ public abstract class Move {
             if(this==obj){
                 return true;
             }
-            if(!(obj instanceof AttackMove)){
+            if(!(obj instanceof AttackMove otherAttackMove)){
                 return false;
             }
-            final AttackMove otherAttackMove=(AttackMove) obj;
             return super.equals(otherAttackMove)&&getAttackedPiece().equals(otherAttackMove.getAttackedPiece());
         }
 
@@ -158,6 +157,16 @@ public abstract class Move {
 
         public PawnMove(Board board, Piece movedPiece, int destinationCoordinate) {
             super(board, movedPiece, destinationCoordinate);
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return this==obj|| obj instanceof PawnMove&& super.equals(obj);
+        }
+
+        @Override
+        public String toString() {
+            return BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
         }
     }
     public static class PawnAttackMove extends AttackMove {
@@ -338,11 +347,10 @@ public abstract class Move {
            if(this==obj){
                return true;
            }
-           if(!(obj instanceof CastleMove)){
+           if(!(obj instanceof CastleMove otherCastleMove)){
                return false;
            }
-           final CastleMove otherCastleMove=(CastleMove) obj;
-           return super.equals(otherCastleMove)&&this.castleRook.equals(otherCastleMove.getCastleRook());
+            return super.equals(otherCastleMove)&&this.castleRook.equals(otherCastleMove.getCastleRook());
         }
     }
     public static class KingSideCastleMove extends CastleMove{
