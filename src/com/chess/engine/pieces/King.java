@@ -47,7 +47,7 @@ public class King extends Piece{
 
     @Override
     public King movePiece(Move move) {
-        return new King(move.getDestinationCoordinate(),move.getMovedPiece().getPieceAlliance());
+        return new King(move.getDestinationCoordinate(),move.getMovedPiece().getPieceAlliance(),false);
     }
 
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset) {
