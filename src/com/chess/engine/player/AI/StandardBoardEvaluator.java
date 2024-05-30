@@ -1,7 +1,6 @@
 package com.chess.engine.player.AI;
-
-import com.chess.engine.board.Board;
-import com.chess.engine.pieces.Piece;
+import com.chess.engine.board.*;
+import com.chess.engine.pieces.*;
 import com.chess.engine.player.*;
 
 public final class StandardBoardEvaluator implements BoardEvaluator {
