@@ -42,7 +42,6 @@ public class MiniMax implements MoveStrategy {
 
     @Override
     public Move execute(Board board) {
-        final long startTime=System.currentTimeMillis();
         Move bestMove=null;
         int highestSeenValue=Integer.MIN_VALUE;
         int lowestSeenValue=Integer.MAX_VALUE;
@@ -63,7 +62,6 @@ public class MiniMax implements MoveStrategy {
                 }
             }
         }
-        final long executionTime=System.currentTimeMillis()-startTime;
         return bestMove;
     }
     public int min(Board board, int depth){

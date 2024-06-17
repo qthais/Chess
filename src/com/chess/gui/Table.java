@@ -28,10 +28,10 @@ public class Table extends Observable {
     private static final Dimension BOARD_PANEL_DIMENSION = new Dimension(704,704);
     private static final Dimension TILE_PANEL_DIMENSION=new Dimension(10,10);
     private final JFrame gameFrame;
-    private final MoveLog moveLog;
-    private final GameHistoryPanel gameHistoryPanel;
-    private final TakenPiecesPanel takenPiecesPanel;
-    private final BoardPanel boardPanel;
+    private MoveLog moveLog;
+    private GameHistoryPanel gameHistoryPanel;
+    private TakenPiecesPanel takenPiecesPanel;
+    private BoardPanel boardPanel;
     private Board chessBoard;
     private Tile sourceTile;
     private Tile destinationTile;
@@ -43,7 +43,7 @@ public class Table extends Observable {
 
     private final Color lightTileColor = Color.decode("#FFFACD");
     private final Color darkTileColor = Color.decode("#593E1A");
-    private static final Table INSTANCE=new Table();
+    private static Table INSTANCE=new Table();
     private final GameSetup gameSetup;
     private Table(){
         this.gameFrame=new JFrame("JChess");
@@ -72,6 +72,16 @@ public class Table extends Observable {
     public static Table get(){
         return INSTANCE;
     }
+
+    public static void setINSTANCE(Table INSTANCE) {
+        Table.INSTANCE = INSTANCE;
+    }
+    public void restartGame(){
+        this.gameFrame.dispose();
+        setINSTANCE(new Table());
+        show();
+    }
+
     public void show(){
         Table.get().getMoveLog().clear();
         Table.get().getGameHistoryPanel().redo(chessBoard, Table.get().getMoveLog());
@@ -96,11 +106,12 @@ public class Table extends Observable {
 
     private JMenu createFileMenu() {
         final JMenu fileMenu=new JMenu("File");
-        final JMenuItem openPGN=new JMenuItem("Load PGN file");
+        final JMenuItem openPGN=new JMenuItem("New Game");
         openPGN.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Open up that pgn file!");
+                restartGame();
+                gameFrame.repaint();
             }
         });
         fileMenu.add(openPGN);
