@@ -1,6 +1,7 @@
 
 # Chess Game
-![](https://i0.wp.com/www.beabetterdev.com/wp-content/uploads/2021/01/intellij-519-d4ff21c469.png?fit=519%2C140&ssl=1)
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Afx0Podr5vaxERDZyFGr8EY644Gip0e1Mw&usqp=CAU)
+
 ## Overview
 
 This project is a brief description of what the project does and its purpose.
@@ -10,8 +11,9 @@ This project is a brief description of what the project does and its purpose.
 Before you begin, ensure you have met the following requirements:
 
 - **Java Development Kit (JDK):** Ensure you have JDK 11 or higher installed.
+- ![https://media.geeksforgeeks.org/wp-content/uploads/20231031124311/Java-JDK-21.png]
 - **IntelliJ IDEA:** Download and install IntelliJ IDEA (Community or Ultimate Edition).
-
+  ![](https://i0.wp.com/www.beabetterdev.com/wp-content/uploads/2021/01/intellij-519-d4ff21c469.png?fit=519%2C140&ssl=1)
 ## Getting Started
 
 Follow these instructions to set up and run the project in IntelliJ IDEA.
